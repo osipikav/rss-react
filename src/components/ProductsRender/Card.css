@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: calc((24% - 5px));
+  margin: 5px;
+  background-color: grey;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  justify-content: flex-end;
+}
+.card__title {
+  margin: 4px;
+  color: white;
+  text-align: center;
+  flex-grow: 1;
+}
+.card__photo {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  flex-grow: 1;
+}
+.card__description {
+  margin-left: 8px;
+  color: yellow;
+  text-align: start;
+}
