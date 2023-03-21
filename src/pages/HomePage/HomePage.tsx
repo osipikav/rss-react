@@ -7,7 +7,7 @@ function HomePage() {
   return (
     <div>
       <SearchBar />
-      <h2>home</h2>
+      <h2>Home</h2>
       <div className="card-container">
         <ProductsRender />
       </div>

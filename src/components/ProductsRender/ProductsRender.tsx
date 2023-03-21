@@ -4,7 +4,6 @@ import { IProduct } from 'types/types';
 import './Card.css';
 
 function ProductsRender() {
-  console.log('list :>> ', list);
   return (
     <>
       {list.map(({ id, title, thumbnail, price, rating, discountPercentage }: IProduct) => (

@@ -1,18 +1,27 @@
 import React from 'react';
 import './Header.css';
 
-import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation';
 
-function Header() {
-  const location = useLocation();
-  const currentRoute = location.pathname.substr(1);
+class Header extends React.Component {
+  state = {
+    currentRoute: '',
+  };
 
-  return (
-    <header className="header">
-      <h3 className="header-title"> {currentRoute}</h3>
-      <Navigation />
-    </header>
-  );
+  componentDidMount() {
+    const { pathname } = window.location;
+    const currentRoute = pathname.slice(1);
+    this.setState({ currentRoute });
+  }
+
+  render() {
+    return (
+      <header className="header">
+        <h3 className="header-title"> {this.state.currentRoute}</h3>
+        <Navigation />
+      </header>
+    );
+  }
 }
+
 export default Header;

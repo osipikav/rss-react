@@ -11,7 +11,6 @@ class SearchBar extends React.Component {
 
     if (searchValue) {
       this.setState({ searchValue });
-      // console.log('searchValue :>> ', searchValue);
     }
   }
 
@@ -19,20 +18,22 @@ class SearchBar extends React.Component {
     localStorage.setItem('searchValue', this.state.searchValue);
   }
 
-  OnChange = (e: { target: { value: string } }) => {
+  onChange = (e: { target: { value: string } }) => {
     this.setState({ searchValue: e.target.value });
-    // console.log('object :>> ', e.target.value);
   };
 
   render() {
     return (
-      <input
-        className="search"
-        type="text"
-        value={this.state.searchValue}
-        onChange={this.OnChange}
-        placeholder="Search..."
-      />
+      <>
+        <input
+          className="search"
+          type="text"
+          value={this.state.searchValue}
+          onChange={this.onChange}
+          placeholder="Search..."
+        />
+        <h3> {this.state.searchValue}</h3>
+      </>
     );
   }
 }
