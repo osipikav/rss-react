@@ -4,7 +4,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './pages/NotFondPage';
-import HomePage from './pages/HomePage/HomePage';
+import { HomePage } from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage';
 
 function App() {
