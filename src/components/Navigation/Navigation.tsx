@@ -11,6 +11,9 @@ function Navigation() {
         <li>
           <Link to="/about">About Us</Link>
         </li>
+        <li>
+          <Link to="/form">Form</Link>
+        </li>
       </ul>
     </nav>
   );
