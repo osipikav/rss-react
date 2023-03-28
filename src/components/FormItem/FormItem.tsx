@@ -2,6 +2,7 @@ import FormCards from '../FormCards/FormCards';
 import React from 'react';
 import './FormItem.css';
 import { ICard } from '../../types/types';
+import Message from '../Message/Message';
 
 const GENDER = [
   { id: 'male', value: 'male', title: 'male' },
@@ -17,6 +18,7 @@ class FormItem extends React.Component {
     radioChecked: '',
     imageUploaded: '',
     isFormSubmitted: false,
+    showMessage: false,
   };
 
   nameRef = React.createRef<HTMLInputElement>();
@@ -48,6 +50,12 @@ class FormItem extends React.Component {
     event.preventDefault();
     const formObject: ICard = { ...this.state };
     this.array.push(formObject);
+
+    this.setState({ showMessage: true });
+    setTimeout(() => {
+      this.setState({ showMessage: false });
+    }, 2000);
+
     this.setState({
       inputName: '',
       inputDate: '',
@@ -87,8 +95,15 @@ class FormItem extends React.Component {
   };
 
   render() {
-    const { inputName, inputDate, selectText, checkboxChecked, radioChecked, imageUploaded } =
-      this.state;
+    const {
+      inputName,
+      inputDate,
+      selectText,
+      checkboxChecked,
+      radioChecked,
+      imageUploaded,
+      showMessage,
+    } = this.state;
     const isNameValid = this.validateName(inputName.trim()) === '';
     const isDateValid = this.validateDate(inputDate) === '';
     const isSelectValid = selectText !== '';
@@ -105,7 +120,7 @@ class FormItem extends React.Component {
 
     return (
       <>
-        <form>
+        <form className="form-container">
           <label>
             Name:
             <input
@@ -119,7 +134,6 @@ class FormItem extends React.Component {
           {!isNameValid && this.state.isFormSubmitted && (
             <div className="error-message">{this.validateName(inputName)}</div>
           )}
-          <br />
           <label>
             Date of birth:
             <input
@@ -133,7 +147,6 @@ class FormItem extends React.Component {
           {!isDateValid && this.state.isFormSubmitted && (
             <div className="error-message">{this.validateDate(inputDate)}</div>
           )}
-          <br />
           <label>
             Gender:
             <select ref={this.selectRef} value={selectText} onChange={this.handleChange}>
@@ -148,10 +161,9 @@ class FormItem extends React.Component {
           {!isSelectValid && this.state.isFormSubmitted && (
             <div className="error-message">Please choose a gender</div>
           )}
-          <br />
           <label>
-            I want to receive notifications about promo, sales, etc
-            <div>
+            Сonsent to receive notifications:
+            <div className="radioButton">
               <input
                 ref={this.radioRefYes}
                 type="radio"
@@ -162,7 +174,7 @@ class FormItem extends React.Component {
               />
               <label htmlFor="yes">Yes</label>
             </div>
-            <div>
+            <div className="radioButton">
               <input
                 ref={this.radioRefNo}
                 type="radio"
@@ -177,9 +189,8 @@ class FormItem extends React.Component {
           {!isRadioValid && this.state.isFormSubmitted && (
             <div className="error-message">Please choose a notification preference</div>
           )}
-          <br />
           <label>
-            Add file
+            Add image:
             <input
               ref={this.imageRef}
               type="file"
@@ -189,11 +200,10 @@ class FormItem extends React.Component {
             />
           </label>
           {!isImageValid && this.state.isFormSubmitted && (
-            <div className="error-message">Please add file</div>
+            <div className="error-message">Please add image</div>
           )}
-          <br />
           <label>
-            I consent to my personal data
+            Consent to personal data:
             <input
               ref={this.checkboxRef}
               type="checkbox"
@@ -205,8 +215,14 @@ class FormItem extends React.Component {
           {!isCheckboxValid && this.state.isFormSubmitted && (
             <div className="error-message">Please аgree to the use of personal data</div>
           )}
-          <button onClick={isFormValid ? this.handleSubmit : this.noHandleSubmit}>Submit</button>
+          <button
+            className="button"
+            onClick={isFormValid ? this.handleSubmit : this.noHandleSubmit}
+          >
+            Submit
+          </button>
         </form>
+        {showMessage && <Message />}
         <FormCards cards={this.array} />
       </>
     );
