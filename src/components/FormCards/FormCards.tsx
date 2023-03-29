@@ -12,8 +12,8 @@ class FormCards extends React.Component<IProps> {
 
     return (
       <div className="cards-container">
-        {cards.map((card: ICard) => (
-          <div key={card.inputName} className="card-item">
+        {cards.map((card: ICard, i) => (
+          <div key={card.inputName + i} className="card-item">
             <h2>{card.inputName}</h2>
             <img src={card.imageUrl} alt="awd" />
             <p>Birth date: {card.inputDate}</p>
