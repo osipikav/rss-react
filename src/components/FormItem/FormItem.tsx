@@ -3,6 +3,13 @@ import React from 'react';
 import './FormItem.css';
 import { ICard } from '../../types/types';
 import Message from '../Message/Message';
+import {
+  validateName,
+  validateDate,
+  validateSelect,
+  validateRadio,
+  validateImage,
+} from '../Validation/Validation';
 
 const GENDER = [
   { id: 'male', value: 'male', title: 'male' },
@@ -72,28 +79,6 @@ class FormItem extends React.Component {
     this.setState({ ...this.state, isFormSubmitted: true });
   };
 
-  validateName = (name: string) => {
-    if (!name) {
-      return 'Please enter your name';
-    }
-    if (name.length < 3) {
-      return 'Name must be at least 3 characters long';
-    }
-    return '';
-  };
-
-  validateDate = (date: string) => {
-    const deliveryDate = new Date(date);
-    const currentDate = new Date();
-    if (!date) {
-      return 'Please enter date of birth';
-    }
-    if (deliveryDate > currentDate) {
-      return 'The date should be in the past';
-    }
-    return '';
-  };
-
   render() {
     const {
       inputName,
@@ -104,12 +89,12 @@ class FormItem extends React.Component {
       imageUploaded,
       showMessage,
     } = this.state;
-    const isNameValid = this.validateName(inputName.trim()) === '';
-    const isDateValid = this.validateDate(inputDate) === '';
-    const isSelectValid = selectText !== '';
+    const isNameValid = validateName(inputName.trim()) === '';
+    const isDateValid = validateDate(inputDate) === '';
+    const isSelectValid = validateSelect(selectText) === '';
     const isCheckboxValid = checkboxChecked;
-    const isRadioValid = radioChecked !== '';
-    const isImageValid = imageUploaded !== '';
+    const isRadioValid = validateRadio(radioChecked) === '';
+    const isImageValid = validateImage(imageUploaded) === '';
     const isFormValid =
       isNameValid &&
       isDateValid &&
@@ -132,7 +117,7 @@ class FormItem extends React.Component {
             />
           </label>
           {!isNameValid && this.state.isFormSubmitted && (
-            <div className="error-message">{this.validateName(inputName)}</div>
+            <div className="error-message">{validateName(inputName)}</div>
           )}
           <label>
             Date of birth:
@@ -145,7 +130,7 @@ class FormItem extends React.Component {
             />
           </label>
           {!isDateValid && this.state.isFormSubmitted && (
-            <div className="error-message">{this.validateDate(inputDate)}</div>
+            <div className="error-message">{validateDate(inputDate)}</div>
           )}
           <label>
             Gender:
