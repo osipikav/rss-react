@@ -27,13 +27,6 @@ export const validateSelect = (selectText: string) => {
   return '';
 };
 
-// export const validateCheckbox = (checkboxChecked: boolean) => {
-//   if (!checkboxChecked) {
-//     return 'Please consent to receive notifications';
-//   }
-//   return '';
-// };
-
 export const validateRadio = (radioChecked: string) => {
   if (!radioChecked) {
     return 'Please choose an option';

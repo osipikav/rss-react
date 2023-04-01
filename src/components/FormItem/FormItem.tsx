@@ -73,7 +73,6 @@ class FormItem extends React.Component {
       isFormSubmitted: false,
     });
   };
-
   noHandleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     this.setState({ ...this.state, isFormSubmitted: true });
