@@ -1,41 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchBar.css';
 
-class SearchBar extends React.Component {
-  state = {
-    searchValue: localStorage.getItem('searchValue') ?? '',
-  };
+function SearchBar() {
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') ?? '');
 
-  componentDidMount() {
-    const searchValue = localStorage.getItem('searchValue');
+  useEffect(() => {
+    localStorage.setItem('searchValue', searchValue);
+  }, [searchValue]);
 
-    if (searchValue) {
-      this.setState({ searchValue });
-    }
+  function handleInputChange(event: { target: { value: string } }) {
+    setSearchValue(event.target.value);
   }
 
-  componentWillUnmount() {
-    localStorage.setItem('searchValue', this.state.searchValue);
-  }
-
-  onChange = (e: { target: { value: string } }) => {
-    this.setState({ searchValue: e.target.value });
-  };
-
-  render() {
-    return (
-      <>
-        <input
-          className="search"
-          type="text"
-          value={this.state.searchValue}
-          onChange={this.onChange}
-          placeholder="Search..."
-        />
-        <h3> {this.state.searchValue}</h3>
-      </>
-    );
-  }
+  return (
+    <>
+      <input
+        className="search"
+        type="text"
+        value={searchValue}
+        onChange={handleInputChange}
+        placeholder="Search..."
+      />
+      <h3> {searchValue}</h3>
+    </>
+  );
 }
 
 export default SearchBar;

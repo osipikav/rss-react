@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Header.css';
-
 import Navigation from '../Navigation/Navigation';
 
 function Header() {
-  const [currentPath, setCurrentPath] = useState('home');
+  const [currentPath, setCurrentPath] = useState('');
   const location = useLocation();
 
   useEffect(() => {
