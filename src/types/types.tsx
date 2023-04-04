@@ -19,6 +19,15 @@ export interface ICard {
   checkboxChecked: boolean;
   radioChecked: string;
   imageUrl?: string;
-  imageUploaded: string;
-  isFormSubmitted: boolean;
+  imageUploaded?: string;
+  isFormSubmitted?: boolean;
+}
+
+export interface IData {
+  concent: boolean;
+  date: string;
+  gender: string;
+  image: string;
+  name: string;
+  notificationPreference?: string;
 }

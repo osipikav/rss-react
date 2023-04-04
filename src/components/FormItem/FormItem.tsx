@@ -1,7 +1,8 @@
 import FormCards from '../FormCards/FormCards';
 import React, { useState } from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import './FormItem.css';
-import { ICard } from '../../types/types';
+import { IData } from '../../types/types';
 import Message from '../Message/Message';
 import {
   validateName,
@@ -11,7 +12,6 @@ import {
   validateImage,
   validateCheckbox,
 } from '../Validation/Validation';
-import { FieldValues, useForm } from 'react-hook-form';
 
 const GENDER = [
   { id: 'male', value: 'male', title: 'male' },
@@ -26,12 +26,22 @@ export default function FormItem() {
     reset,
   } = useForm();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [validatedData, setValidatedData] = useState<IData[]>([]);
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsFormSubmitted(true);
+
+    const card: IData = {
+      name: data.name,
+      image: URL.createObjectURL(data.image[0]),
+      concent: data.concent,
+      date: data.date,
+      gender: data.gender,
+    };
+
+    setValidatedData((prevState) => [...prevState, card]);
+
     setTimeout(() => {
-      console.log('object :>> ');
       setIsFormSubmitted(false);
       reset();
     }, 2000);
@@ -107,6 +117,7 @@ export default function FormItem() {
         <button type="submit">Submit</button>
       </form>
       {isFormSubmitted && <Message />}
+      <FormCards cards={validatedData} />
     </>
   );
 }
