@@ -39,7 +39,9 @@ describe('FormCards', () => {
       const cardImageElement = screen.getByAltText('img', { src: card.image });
       const cardDateElement = screen.getByText(`Birth date: ${card.date}`);
       const cardGenderElement = screen.getByText(`Gender: ${card.gender}`);
-      const cardNotificationElement = screen.getByText(`Сonsent to receive notifications: ${!card.notificationPreference ? 'yes' : 'no'}`);
+      const cardNotificationElement = screen.getByText(
+        `Сonsent to receive notifications: ${!card.notificationPreference ? 'yes' : 'no'}`
+      );
       const cardConsentElement = screen.getByText('Consent to personal data');
       expect(cardNameElement).toBeInTheDocument();
       expect(cardImageElement).toBeInTheDocument();

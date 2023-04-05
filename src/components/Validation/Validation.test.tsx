@@ -1,4 +1,11 @@
-import { validateName, validateDate, validateSelect, validateRadio, validateImage, validateCheckbox } from './Validation'
+import {
+  validateName,
+  validateDate,
+  validateSelect,
+  validateRadio,
+  validateImage,
+  validateCheckbox,
+} from './Validation';
 
 describe('Form Validators', () => {
   describe('validateName', () => {

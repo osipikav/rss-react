@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import FormItem from './FormItem';
 import React from 'react';
 describe('FormItem', () => {
