@@ -1,18 +1,22 @@
 import React from 'react';
-import list from '../../data/data';
+// import list from '../../data/data';
 import { IProduct } from 'types/types';
 import './Card.css';
 
-function ProductsRender() {
+interface Props {
+  movies: IProduct[];
+}
+
+function ProductsRender({ movies }: Props) {
   return (
     <>
-      {list.map(({ id, title, thumbnail, price, rating, discountPercentage }: IProduct) => (
+      {movies.map(({ id, title, rating, medium_cover_image: image, year, genres }: IProduct) => (
         <div className="card" key={id}>
           <div className="card__title">{title}</div>
-          <div className="card__photo" style={{ backgroundImage: `url(${thumbnail})` }}></div>
-          <div className="card__description">price: {price}$</div>
+          <div className="card__photo" style={{ backgroundImage: `url(${image})` }}></div>
+          <div className="card__description">{genres.join(' ')}</div>
+          <div className="card__description"> {year}</div>
           <div className="card__description">rating: {rating} </div>
-          <div className="card__description">discount: {discountPercentage}%</div>
         </div>
       ))}
     </>

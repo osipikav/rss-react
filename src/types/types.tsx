@@ -1,17 +1,3 @@
-export interface IProduct {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}
-
 export interface ICard {
   inputName: string;
   inputDate: string;
@@ -30,4 +16,35 @@ export interface IData {
   image: string;
   name: string;
   notificationPreference?: string;
+}
+
+export interface IProduct {
+  background_image: string;
+  background_image_original: string;
+  date_uploaded: string;
+  date_uploaded_unix: number;
+  description_full: string;
+  genres: string[];
+  id: number;
+  imdb_code: string;
+  language: string;
+  large_cover_image: string;
+  medium_cover_image: string;
+  mpa_rating: string;
+  rating: number;
+  runtime: number;
+  slug: string;
+  small_cover_image: string;
+  state: string;
+  summary: string;
+  synopsis: string;
+  title: string;
+  title_english: string;
+  title_long: string;
+  // torrents
+  // :
+  // (2) [{…}, {…}]
+  url: string;
+  year: number;
+  yt_trailer_code: string;
 }

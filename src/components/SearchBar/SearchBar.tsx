@@ -1,27 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './SearchBar.css';
+import getMovies from '../GetMovies/GetMovies';
+import ProductsRender from '../ProductsRender/ProductsRender';
+import { IProduct } from 'types/types';
 
 function SearchBar() {
-  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') ?? '');
+  const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('searchValue') ?? '');
+  const [movies, setMovies] = useState<IProduct[]>([]);
 
-  useEffect(() => {
+  function handleInputChange(e: { target: { value: string } }) {
+    setSearchValue(e.target.value);
+  }
+
+  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
     localStorage.setItem('searchValue', searchValue);
-  }, [searchValue]);
-
-  function handleInputChange(event: { target: { value: string } }) {
-    setSearchValue(event.target.value);
+    const movies = await getMovies(searchValue);
+    // console.log('movies', movies);
+    setMovies(movies);
   }
 
   return (
     <>
-      <input
-        className="search"
-        type="text"
-        value={searchValue}
-        onChange={handleInputChange}
-        placeholder="Search..."
-      />
+      <form className="searchForm" onSubmit={handleSubmit}>
+        <input
+          className="search"
+          type="text"
+          value={searchValue}
+          onChange={handleInputChange}
+          placeholder="Search..."
+        />
+        <button type="submit">Search</button>
+      </form>
       <h3> {searchValue}</h3>
+      <div className="card-container">
+        <ProductsRender movies={movies} />
+      </div>
     </>
   );
 }
