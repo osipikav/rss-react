@@ -19,29 +19,29 @@ export interface IData {
 }
 
 export interface IProduct {
-  background_image: string;
-  background_image_original: string;
-  date_uploaded: string;
-  date_uploaded_unix: number;
-  description_full: string;
+  background_image?: string;
+  background_image_original?: string;
+  date_uploaded?: string;
+  date_uploaded_unix?: number;
+  description_full?: string;
   genres: string[];
   id: number;
-  imdb_code: string;
-  language: string;
-  large_cover_image: string;
-  medium_cover_image: string;
-  mpa_rating: string;
+  imdb_code?: string;
+  language?: string;
+  large_cover_image?: string;
+  medium_cover_image?: string;
+  mpa_rating?: string;
   rating: number;
-  runtime: number;
-  slug: string;
-  small_cover_image: string;
-  state: string;
-  summary: string;
-  synopsis: string;
+  runtime?: number;
+  slug?: string;
+  small_cover_image?: string;
+  state?: string;
+  summary?: string;
+  synopsis?: string;
   title: string;
-  title_english: string;
-  title_long: string;
-  url: string;
+  title_english?: string;
+  title_long?: string;
+  url?: string;
   year: number;
-  yt_trailer_code: string;
+  yt_trailer_code?: string;
 }
