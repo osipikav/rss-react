@@ -36,7 +36,7 @@ function SearchBar() {
 
   return (
     <>
-      <form className="searchForm" onSubmit={handleSubmit}>
+      <form className="search-form" onSubmit={handleSubmit}>
         <input
           className="search"
           type="text"
@@ -44,9 +44,10 @@ function SearchBar() {
           onChange={handleInputChange}
           placeholder="Search..."
         />
-        <button type="submit">Search</button>
+        <button className="search-button" type="submit">
+          Search
+        </button>
       </form>
-      <h3> {searchValue}</h3>
       <div className="card-container">
         {movies !== undefined ? (
           isLoading ? (

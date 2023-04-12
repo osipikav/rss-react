@@ -8,17 +8,16 @@ interface Props {
 }
 
 function Popup({ movie, onClose }: Props) {
-  // console.log('movie :>> ', movie);
-  const { title, year, large_cover_image: image, rating, synopsis } = movie;
+  const { title, year, large_cover_image: image, rating, genres, synopsis } = movie;
   return (
-    <div className="overlay" onClick={onClose}>
+    <div className="popup__overlay" onClick={onClose}>
       <div className="popup">
         <h2>{title}</h2>
+        <div className="popup__image" style={{ backgroundImage: `url(${image})` }}></div>
+        <h3>{genres.join(', ')}</h3>
         <h3>{year}</h3>
-        <h3>Rating: {rating}</h3>
-        <div className="card__photo" style={{ backgroundImage: `url(${image})` }}></div>
         <p> {synopsis}</p>
-        <button onClick={onClose}>Close</button>
+        <h3>Rating: {rating}</h3>
       </div>
     </div>
   );

@@ -1,5 +1,14 @@
+.search-button {
+  background-color: rgb(196, 214, 214);
+  padding: 4px 10px;
+}
+
+.search-button:hover {
+  border-color: rgb(26, 25, 25);
+}
+
 .search {
-  margin: 10px auto;
+  margin: 10px;
   padding: 5px 15px;
   border-radius: 15px;
 }
