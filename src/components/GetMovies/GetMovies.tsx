@@ -6,11 +6,10 @@ async function getMovies(queryValue: string) {
       `https://yts.mx/api/v2/list_movies.json?query_term=${queryValue}`
     );
     const data = response.data.data.movies;
-    console.log('data :>> ', data);
-    return data;
+    return data !== 'undefined' ? data : [];
   } catch (error) {
     console.error('Ошибка:', error);
-    return error;
+    return [];
   }
 }
 

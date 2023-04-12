@@ -41,9 +41,6 @@ export interface IProduct {
   title: string;
   title_english: string;
   title_long: string;
-  // torrents
-  // :
-  // (2) [{…}, {…}]
   url: string;
   year: number;
   yt_trailer_code: string;
