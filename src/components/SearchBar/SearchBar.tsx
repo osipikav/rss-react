@@ -1,41 +1,66 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './SearchBar.css';
+import getMovies from '../GetMovies/GetMovies';
+import ProductsRender from '../ProductsRender/ProductsRender';
+import { IProduct } from 'types/types';
+import Spiner from '../Spiner/Spiner';
 
-class SearchBar extends React.Component {
-  state = {
-    searchValue: localStorage.getItem('searchValue') ?? '',
-  };
+function SearchBar() {
+  const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('searchValue') ?? '');
+  const [movies, setMovies] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  componentDidMount() {
-    const searchValue = localStorage.getItem('searchValue');
+  function handleInputChange(e: { target: { value: string } }) {
+    setSearchValue(e.target.value);
+  }
 
-    if (searchValue) {
-      this.setState({ searchValue });
+  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    localStorage.setItem('searchValue', searchValue);
+    setIsLoading(true);
+    const movies = await getMovies(searchValue);
+    setMovies(movies);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    async function fetchMovies() {
+      setIsLoading(true);
+      const movies = await getMovies(searchValue);
+      setMovies(movies);
+      setIsLoading(false);
     }
-  }
+    fetchMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  componentWillUnmount() {
-    localStorage.setItem('searchValue', this.state.searchValue);
-  }
-
-  onChange = (e: { target: { value: string } }) => {
-    this.setState({ searchValue: e.target.value });
-  };
-
-  render() {
-    return (
-      <>
+  return (
+    <>
+      <form className="search-form" onSubmit={handleSubmit}>
         <input
           className="search"
           type="text"
-          value={this.state.searchValue}
-          onChange={this.onChange}
+          value={searchValue}
+          onChange={handleInputChange}
           placeholder="Search..."
         />
-        <h3> {this.state.searchValue}</h3>
-      </>
-    );
-  }
+        <button className="search-button" type="submit">
+          Search
+        </button>
+      </form>
+      <div className="card-container">
+        {movies !== undefined ? (
+          isLoading ? (
+            <Spiner />
+          ) : (
+            <ProductsRender movies={movies} />
+          )
+        ) : (
+          <div>Not found</div>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default SearchBar;

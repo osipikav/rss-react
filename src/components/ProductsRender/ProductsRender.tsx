@@ -1,21 +1,40 @@
-import React from 'react';
-import list from '../../data/data';
+import React, { useState } from 'react';
 import { IProduct } from 'types/types';
 import './Card.css';
+import Popup from '../Popup/Popup';
 
-function ProductsRender() {
+interface Props {
+  movies: IProduct[];
+}
+
+function ProductsRender({ movies }: Props) {
+  const [selectedCard, setSelectedCard] = useState<IProduct | null>(null);
+
+  function handleCardClick(selectedMovie: IProduct) {
+    setSelectedCard(selectedMovie);
+  }
+
+  function handlePopupClose() {
+    setSelectedCard(null);
+  }
+
   return (
     <>
-      {list.map(({ id, title, thumbnail, price, rating, discountPercentage }: IProduct) => (
-        <div className="card" key={id}>
-          <div className="card__title">{title}</div>
-          <div className="card__photo" style={{ backgroundImage: `url(${thumbnail})` }}></div>
-          <div className="card__description">price: {price}$</div>
-          <div className="card__description">rating: {rating} </div>
-          <div className="card__description">discount: {discountPercentage}%</div>
+      {movies.map((movie: IProduct) => (
+        <div className="card" key={movie.id} onClick={() => handleCardClick(movie)}>
+          <div className="card__title">{movie.title}</div>
+          <div
+            className="card__photo"
+            style={{ backgroundImage: `url(${movie.large_cover_image})` }}
+          ></div>
+          <div className="card__description">{movie.genres.join(', ')}</div>
+          <div className="card__description">{movie.year}</div>
+          <div className="card__description">rating: {movie.rating}</div>
         </div>
       ))}
+      {selectedCard && <Popup movie={selectedCard} onClose={handlePopupClose} />}
     </>
   );
 }
+
 export default ProductsRender;
