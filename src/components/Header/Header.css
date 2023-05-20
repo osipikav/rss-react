@@ -3,7 +3,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* height: 100px; */
+  height: 4em;
+  max-width: 100%;
+  border-radius: 0 0 1em 1em;
+  padding: 0 2em;
 }
 
 .header nav {
@@ -15,14 +18,12 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
-  /* background-color: aqua; */
   padding: 0;
   margin: 5px;
 }
 
 .header li {
   list-style-type: none;
-  /* background-color: azure; */
   margin: 0 5px;
 }
 
