@@ -12,6 +12,9 @@
   border-radius: 8px;
   margin-right: 10px;
 }
+.card-item:hover {
+  cursor: pointer;
+}
 .card-item img {
   width: 100%;
 }

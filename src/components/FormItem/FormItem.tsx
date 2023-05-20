@@ -114,7 +114,9 @@ export default function FormItem() {
           <input {...register('concent', { validate: validateCheckbox })} type="checkbox" />
         </label>
         {errors?.concent && <div className="error-message">{String(errors?.concent?.message)}</div>}
-        <button type="submit">Submit</button>
+        <button className="button" type="submit">
+          Submit
+        </button>
       </form>
       {isFormSubmitted && <Message />}
       <FormCards cards={validatedData} />
