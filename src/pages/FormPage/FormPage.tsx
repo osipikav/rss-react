@@ -4,7 +4,7 @@ import React from 'react';
 function FormPage() {
   return (
     <div>
-      <h2>Please complete the form</h2>
+      <h2>Complete the form</h2>
       <FormItem />
     </div>
   );

@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFondPage';
 import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage';
 import FormPage from './pages/FormPage/FormPage';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/404" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
