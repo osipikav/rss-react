@@ -1,0 +1,18 @@
+.search-button {
+  background-color: rgb(196, 214, 214);
+  padding: 4px 10px;
+  margin-left: 1em;
+}
+
+.search-button:hover {
+  border-color: rgb(26, 25, 25);
+}
+
+.search {
+  padding: 7px 15px;
+  border-radius: 15px;
+}
+
+.search-form {
+  margin: 1.5em 0;
+}
